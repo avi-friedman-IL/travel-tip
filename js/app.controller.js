@@ -68,7 +68,12 @@ function renderLocs(locs) {
     document.querySelector('.debug').innerText = JSON.stringify(locs, null, 2)
 }
 
+function deletionConfirmation() {
+    return confirm('Delete the location?')
+}
+
 function onRemoveLoc(locId) {
+    if (!deletionConfirmation()) return
     locService.remove(locId)
         .then(() => {
             flashMsg('Location removed')
