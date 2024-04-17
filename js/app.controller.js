@@ -17,7 +17,7 @@ window.app = {
     onSetSortBy,
     onSetFilterBy,
 }
-
+console.log(Date.now());
 function onInit() {
     loadAndRenderLocs()
 
@@ -101,7 +101,7 @@ function onAddLoc(geo) {
     const loc = {
         name: locName,
         rate: +prompt(`Rate (1-5)`, '3'),
-        geo
+        geo,
     }
     locService.save(loc)
         .then((savedLoc) => {
@@ -243,8 +243,8 @@ function onSetSortBy() {
     loadAndRenderLocs()
 }
 
-function onSetFilterBy({ txt, minRate }) {
-    const filterBy = locService.setFilterBy({ txt, minRate: +minRate })
+function onSetFilterBy({ txt, minRate, createdAt }) {
+    const filterBy = locService.setFilterBy({ txt, minRate: +minRate, createdAt })
     utilService.updateQueryParams(filterBy)
     loadAndRenderLocs()
 }

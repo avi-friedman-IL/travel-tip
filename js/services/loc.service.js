@@ -55,6 +55,8 @@ function query() {
                 locs.sort((p1, p2) => (p1.rate - p2.rate) * gSortBy.rate)
             } else if (gSortBy.name !== undefined) {
                 locs.sort((p1, p2) => p1.name.localeCompare(p2.name) * gSortBy.name)
+            } else if (gSortBy.createdAt !== undefined) {
+                locs.sort((p1, p2) => (p1.createdAt - p2.createdAt) * gSortBy.createdAt)
             }
 
             return locs
@@ -141,10 +143,9 @@ function _createDemoLocs() {
                     lat: 28.5096676,
                     lng: 34.5165187,
                     zoom: 11
-                }
+                },
             }
         ]
-
     locs = locs.map(_createLoc)
     utilService.saveToStorage(DB_KEY, locs)
 }
