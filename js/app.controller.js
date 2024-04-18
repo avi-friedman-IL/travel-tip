@@ -17,7 +17,7 @@ window.app = {
     onSetSortBy,
     onSetFilterBy,
 }
-console.log(Date.now());
+
 function onInit() {
     loadAndRenderLocs()
 
@@ -179,10 +179,15 @@ function displayLoc(loc) {
     mapService.panTo(loc.geo)
     mapService.setMarker(loc)
 
+    const { lat, lng } = loc.geo
+    mapService.getUserPosition()
+    const distance = utilService.getDistance(window.gUserPosition, { lat, lng }, 'K')
+
     const el = document.querySelector('.selected-loc')
     el.querySelector('.loc-name').innerText = loc.name
     el.querySelector('.loc-address').innerText = loc.geo.address
     el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
+    el.querySelector('.loc-distance-to').innerHTML = `distance: ${distance}km` || ''
     el.querySelector('[name=loc-copier]').value = window.location
     el.classList.add('show')
 
