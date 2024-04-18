@@ -18,6 +18,7 @@ window.app = {
     onSetFilterBy,
 }
 
+
 function onInit() {
     loadAndRenderLocs()
 
@@ -183,10 +184,6 @@ function displayLoc(loc) {
 
     mapService.panTo(loc.geo)
     mapService.setMarker(loc)
-
-    const { lat, lng } = loc.geo
-    mapService.getUserPosition()
-    const distance = gUserPosition ? utilService.getDistance(gUserPosition, loc.geo, 'K') : ''
 
     const el = document.querySelector('.selected-loc')
     el.querySelector('.loc-name').innerText = loc.name
